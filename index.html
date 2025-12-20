@@ -498,8 +498,11 @@
                         <div class="bg-primary-blue/50 p-6 rounded-xl">
                             <h3 class="text-xl font-bold mb-4">Schedule a Session</h3>
                             <form action="mailto:ndelefotinati64@gmail.com" method="post" enctype="text/plain">
-    <input type="text" name="Name" placeholder="Your Name" required>
-    <input type="email" name="EmailAdress" placeholder="Email Address" required>
+                                <div class="mb-4">
+    <input type="text" placeholder="Your Name" class="w-full p-3 bg-secondary-blue/70 rounded-lg border border-gray-700 focus:outline-none focus:border-accent-blue">
+                        </div>
+                                <div class="mb-4">
+    <input type="email" placeholder="Email Address" class="w-full p-3 bg-secondary-blue/70 rounded-lg border border-gray-700 focus:outline-none focus:border-accent-blue">
     <!-- weka sehemu nyingine za fomu hapa -->
     <button type="submit">Request Booking</button>
 </form>
