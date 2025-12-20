@@ -1,0 +1,671 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotinati Ndele | Bridging Medicine & Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    <style>
+        :root {
+            --primary-blue: #0A192F;
+            --secondary-blue: #112240;
+            --accent-blue: #64FFDA;
+            --text-light: #E6F1FF;
+            --text-gray: #8892B0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-blue);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-weight: 600;
+        }
+
+        .glass-card {
+            background: rgba(17, 34, 64, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(100, 255, 218, 0.1);
+            border-radius: 12px;
+        }
+
+        .gradient-text {
+            background: linear-gradient(90deg, #64FFDA, #4FACFE);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 3rem;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            width: 60%;
+            height: 3px;
+            background: var(--accent-blue);
+            bottom: -10px;
+            left: 0;
+            border-radius: 2px;
+        }
+
+        .skill-icon {
+            transition: all 0.3s ease;
+        }
+
+        .skill-icon:hover {
+            transform: translateY(-5px);
+        }
+
+        .project-card {
+            transition: all 0.3s ease;
+            overflow: hidden;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(100, 255, 218, 0.1);
+        }
+
+        .project-image {
+            height: 200px;
+            overflow: hidden;
+            border-radius: 8px 8px 0 0;
+        }
+
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+
+        .nav-link {
+            position: relative;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background: var(--accent-blue);
+            bottom: -5px;
+            left: 0;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        @media (max-width: 768px) {
+            .hero-content {
+                flex-direction: column;
+            }
+            
+            .dual-career-cards {
+                flex-direction: column;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .animate-fadeInUp {
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .stagger-animation > * {
+            opacity: 0;
+            animation: fadeInUp 0.6s ease forwards;
+        }
+
+        .stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+        .stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+        .stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+        .stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+        .stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+        .stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+    </style>
+</head>
+<body class="bg-gray-900">
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 py-4 px-6 bg-primary-blue/90 backdrop-blur-md">
+        <div class="container mx-auto flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold gradient-text">Fotinati Ndele</a>
+            
+            <!-- Desktop Menu -->
+            <div class="hidden md:flex space-x-8">
+                <a href="#home" class="nav-link">Home</a>
+                <a href="#career" class="nav-link">Dual Career</a>
+                <a href="#projects" class="nav-link">Projects</a>
+                <a href="#skills" class="nav-link">Skills</a>
+                <a href="#mentorship" class="nav-link">Mentorship</a>
+            </div>
+            
+            <!-- Mobile Menu Button -->
+            <button id="mobile-menu-button" class="md:hidden text-accent-blue">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-secondary-blue p-6 md:hidden">
+            <div class="flex justify-between items-center mb-8">
+                <span class="text-xl font-bold gradient-text">Menu</span>
+                <button id="close-menu" class="text-accent-blue">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            <div class="flex flex-col space-y-6">
+                <a href="#home" class="nav-link text-lg">Home</a>
+                <a href="#career" class="nav-link text-lg">Dual Career</a>
+                <a href="#projects" class="nav-link text-lg">Projects</a>
+                <a href="#skills" class="nav-link text-lg">Skills</a>
+                <a href="#mentorship" class="nav-link text-lg">Mentorship</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-16 px-4 md:px-8 lg:px-16">
+        <div class="container mx-auto">
+            <div class="hero-content flex flex-col md:flex-row items-center justify-between">
+                <!-- Left Content -->
+                <div class="md:w-1/2 mb-12 md:mb-0 stagger-animation">
+                    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                        <span class="block">Bridging</span>
+                        <span class="block gradient-text">Medicine & Technology</span>
+                    </h1>
+                    <p class="text-lg text-gray-300 mb-8 max-w-lg">
+                        I'm Fotinati Ndele, a Clinical Officer (Medical Doctor) and Full-stack Developer/Designer. 
+                        I combine medical expertise with cutting-edge technology to create innovative solutions.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#projects" class="px-6 py-3 bg-accent-blue text-primary-blue font-semibold rounded-lg hover:bg-opacity-90 transition">
+                            View Projects
+                        </a>
+                        <a href="#mentorship" class="px-6 py-3 glass-card font-semibold rounded-lg hover:bg-opacity-80 transition">
+                            Book a Session
+                        </a>
+                    </div>
+                    
+                    <div class="mt-12">
+                        <h3 class="text-xl mb-4">Founder of:</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <span class="px-4 py-2 glass-card rounded-full text-sm">Vectropy</span>
+                            <span class="px-4 py-2 glass-card rounded-full text-sm">Ndele Graphics</span>
+                            <span class="px-4 py-2 glass-card rounded-full text-sm">Binary Shadow Dev</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Right Content - Photo Placeholder -->
+                <div class="md:w-1/2 flex justify-center md:justify-end">
+                    <div class="relative">
+                        <div class="w-64 h-64 md:w-80 md:h-80 rounded-full overflow-hidden border-4 border-accent-blue/30 shadow-2xl">
+                            <!-- Professional Photo Placeholder -->
+                            <div class="w-full h-full bg-gradient-to-br from-secondary-blue to-primary-blue flex items-center justify-center">
+                                <i class="fas fa-user-md text-8xl text-accent-blue/50"></i>
+                            </div>
+                        </div>
+                        <div class="absolute -bottom-4 -right-4 w-24 h-24 rounded-full glass-card flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-code text-2xl text-accent-blue mb-1"></i>
+                                <p class="text-xs font-bold">Full-Stack</p>
+                            </div>
+                        </div>
+                        <div class="absolute -top-4 -left-4 w-20 h-20 rounded-full glass-card flex items-center justify-center">
+                            <div class="text-center">
+                                <i class="fas fa-stethoscope text-xl text-accent-blue mb-1"></i>
+                                <p class="text-xs font-bold">Clinical</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dual Career Section -->
+    <section id="career" class="py-20 px-4 md:px-8 lg:px-16">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title">Dual Career</h2>
+            <p class="text-gray-300 mb-12 max-w-2xl">Combining expertise in clinical medicine with software engineering to create innovative healthcare solutions.</p>
+            
+            <div class="dual-career-cards flex flex-col md:flex-row gap-8">
+                <!-- Medicine Card -->
+                <div class="glass-card p-8 md:w-1/2 hover:transform hover:-translate-y-2 transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-accent-blue/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-stethoscope text-3xl text-accent-blue"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Clinical Medicine</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        As a licensed Clinical Officer, I have extensive experience in patient diagnosis, treatment, and healthcare management. 
+                        My medical background provides unique insights into healthcare technology needs and challenges.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-accent-blue mr-3"></i>
+                            <span>Patient diagnosis and treatment</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-accent-blue mr-3"></i>
+                            <span>Healthcare systems management</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-accent-blue mr-3"></i>
+                            <span>Medical research and data analysis</span>
+                        </li>
+                    </ul>
+                </div>
+                
+                <!-- Software Engineering Card -->
+                <div class="glass-card p-8 md:w-1/2 hover:transform hover:-translate-y-2 transition duration-300">
+                    <div class="flex items-center mb-6">
+                        <div class="w-16 h-16 rounded-full bg-accent-blue/10 flex items-center justify-center mr-4">
+                            <i class="fas fa-code text-3xl text-accent-blue"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold">Software Engineering</h3>
+                    </div>
+                    <p class="text-gray-300 mb-6">
+                        As a full-stack developer and designer, I create digital solutions that bridge technology gaps in healthcare 
+                        and other industries, with a focus on usability, performance, and scalability.
+                    </p>
+                    <ul class="space-y-3">
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-accent-blue mr-3"></i>
+                            <span>Full-stack web application development</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-accent-blue mr-3"></i>
+                            <span>UI/UX design and prototyping</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-check-circle text-accent-blue mr-3"></i>
+                            <span>Healthcare technology solutions</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Gallery -->
+    <section id="projects" class="py-20 px-4 md:px-8 lg:px-16 bg-secondary-blue/30">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title">Projects</h2>
+            <p class="text-gray-300 mb-12 max-w-2xl">A showcase of projects that demonstrate the intersection of healthcare, technology, and design.</p>
+            
+            <div class="projects-grid grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="project-card glass-card rounded-xl overflow-hidden">
+                    <div class="project-image bg-gradient-to-r from-primary-blue to-accent-blue/20 flex items-center justify-center">
+                        <i class="fas fa-hospital-alt text-8xl text-accent-blue/50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Hospital Appointment System</h3>
+                        <p class="text-gray-300 mb-4">
+                            A full-stack web application for managing patient appointments, medical records, and doctor schedules.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary-blue/50 rounded-full text-xs">React</span>
+                            <span class="px-3 py-1 bg-primary-blue/50 rounded-full text-xs">Node.js</span>
+                            <span class="px-3 py-1 bg-primary-blue/50 rounded-full text-xs">MongoDB</span>
+                        </div>
+                        <a href="#" class="text-accent-blue font-semibold flex items-center">
+                            View Details <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 2 -->
+                <div class="project-card glass-card rounded-xl overflow-hidden">
+                    <div class="project-image bg-gradient-to-r from-primary-blue to-purple-500/20 flex items-center justify-center">
+                        <i class="fas fa-calendar-alt text-8xl text-purple-400/50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">EventHub</h3>
+                        <p class="text-gray-300 mb-4">
+                            An event management system for planning, promoting, and managing events of all sizes.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary-blue/50 rounded-full text-xs">Next.js</span>
+                            <span class="px-3 py-1 bg-primary-blue/50 rounded-full text-xs">Tailwind CSS</span>
+                            <span class="px-3 py-1 bg-primary-blue/50 rounded-full text-xs">Firebase</span>
+                        </div>
+                        <a href="#" class="text-accent-blue font-semibold flex items-center">
+                            View Details <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Project 3 -->
+                <div class="project-card glass-card rounded-xl overflow-hidden">
+                    <div class="project-image bg-gradient-to-r from-primary-blue to-pink-500/20 flex items-center justify-center">
+                        <i class="fas fa-palette text-8xl text-pink-400/50"></i>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-3">Ndele Graphics Branding Portfolio</h3>
+                        <p class="text-gray-300 mb-4">
+                            A comprehensive branding and design portfolio showcasing logos, brand identities, and marketing materials.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4">
+                            <span class="px-3 py-1 bg-primary-blue/50 rounded-full text-xs">Figma</span>
+                            <span class="px-3 py-1 bg-primary-blue/50 rounded-full text-xs">Adobe Creative Suite</span>
+                            <span class="px-3 py-1 bg-primary-blue/50 rounded-full text-xs">Web Design</span>
+                        </div>
+                        <a href="#" class="text-accent-blue font-semibold flex items-center">
+                            View Details <i class="fas fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills/Tech Stack -->
+    <section id="skills" class="py-20 px-4 md:px-8 lg:px-16">
+        <div class="container mx-auto">
+            <h2 class="text-3xl md:text-4xl font-bold mb-4 section-title">Skills & Tech Stack</h2>
+            <p class="text-gray-300 mb-12 max-w-2xl">Combining medical diagnostics with modern development technologies.</p>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Skill 1 -->
+                <div class="skill-icon glass-card p-6 rounded-xl flex flex-col items-center justify-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-accent-blue/10 flex items-center justify-center mb-4">
+                        <i class="fab fa-react text-4xl text-accent-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">React</h3>
+                    <p class="text-gray-300 text-sm">Frontend development for dynamic web applications</p>
+                </div>
+                
+                <!-- Skill 2 -->
+                <div class="skill-icon glass-card p-6 rounded-xl flex flex-col items-center justify-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-accent-blue/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-code-branch text-4xl text-accent-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Next.js</h3>
+                    <p class="text-gray-300 text-sm">Full-stack React framework for production</p>
+                </div>
+                
+                <!-- Skill 3 -->
+                <div class="skill-icon glass-card p-6 rounded-xl flex flex-col items-center justify-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-accent-blue/10 flex items-center justify-center mb-4">
+                        <i class="fab fa-css3-alt text-4xl text-accent-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Tailwind CSS</h3>
+                    <p class="text-gray-300 text-sm">Utility-first CSS framework for rapid UI development</p>
+                </div>
+                
+                <!-- Skill 4 -->
+                <div class="skill-icon glass-card p-6 rounded-xl flex flex-col items-center justify-center text-center">
+                    <div class="w-20 h-20 rounded-full bg-accent-blue/10 flex items-center justify-center mb-4">
+                        <i class="fas fa-stethoscope text-4xl text-accent-blue"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-2">Medical Diagnostics</h3>
+                    <p class="text-gray-300 text-sm">Clinical assessment and healthcare technology integration</p>
+                </div>
+            </div>
+            
+            <div class="mt-12 glass-card p-8 rounded-xl">
+                <h3 class="text-2xl font-bold mb-6">Additional Skills</h3>
+                <div class="flex flex-wrap gap-4">
+                    <span class="px-4 py-2 bg-primary-blue/50 rounded-full">Node.js</span>
+                    <span class="px-4 py-2 bg-primary-blue/50 rounded-full">UI/UX Design</span>
+                    <span class="px-4 py-2 bg-primary-blue/50 rounded-full">Healthcare Systems</span>
+                    <span class="px-4 py-2 bg-primary-blue/50 rounded-full">MongoDB</span>
+                    <span class="px-4 py-2 bg-primary-blue/50 rounded-full">Figma</span>
+                    <span class="px-4 py-2 bg-primary-blue/50 rounded-full">Project Management</span>
+                    <span class="px-4 py-2 bg-primary-blue/50 rounded-full">Medical Research</span>
+                    <span class="px-4 py-2 bg-primary-blue/50 rounded-full">Technical Mentoring</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mentorship/CTA -->
+    <section id="mentorship" class="py-20 px-4 md:px-8 lg:px-16 bg-secondary-blue/30">
+        <div class="container mx-auto">
+            <div class="glass-card p-8 md:p-12 rounded-2xl max-w-4xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center">
+                    <div class="md:w-2/3 mb-8 md:mb-0 md:pr-12">
+                        <h2 class="text-3xl md:text-4xl font-bold mb-4">Book a Mentorship Session</h2>
+                        <p class="text-gray-300 mb-6">
+                            Whether you're a medical professional looking to integrate technology into your practice, 
+                            a developer interested in healthcare tech, or a student navigating career choices, 
+                            I offer personalized mentorship sessions.
+                        </p>
+                        <ul class="space-y-3 mb-8">
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent-blue mt-1 mr-3"></i>
+                                <span>Career guidance at the intersection of medicine and tech</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent-blue mt-1 mr-3"></i>
+                                <span>Technical project reviews and architecture guidance</span>
+                            </li>
+                            <li class="flex items-start">
+                                <i class="fas fa-check-circle text-accent-blue mt-1 mr-3"></i>
+                                <span>Healthcare technology implementation strategies</span>
+                            </li>
+                        </ul>
+                    </div>
+                    
+                    <div class="md:w-1/3">
+                        <div class="bg-primary-blue/50 p-6 rounded-xl">
+                            <h3 class="text-xl font-bold mb-4">Schedule a Session</h3>
+                            <form id="mentorship-form">
+                                <div class="mb-4">
+                                    <input type="text" placeholder="Your Name" class="w-full p-3 bg-secondary-blue/70 rounded-lg border border-gray-700 focus:outline-none focus:border-accent-blue">
+                                </div>
+                                <div class="mb-4">
+                                    <input type="email" placeholder="Email Address" class="w-full p-3 bg-secondary-blue/70 rounded-lg border border-gray-700 focus:outline-none focus:border-accent-blue">
+                                </div>
+                                <div class="mb-6">
+                                    <select class="w-full p-3 bg-secondary-blue/70 rounded-lg border border-gray-700 focus:outline-none focus:border-accent-blue">
+                                        <option value="">Select Session Type</option>
+                                        <option value="career">Career Guidance</option>
+                                        <option value="tech">Technical Review</option>
+                                        <option value="healthcare">Healthcare Tech</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="w-full py-3 bg-accent-blue text-primary-blue font-bold rounded-lg hover:bg-opacity-90 transition">
+                                    Request Booking
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-4 md:px-8 lg:px-16 bg-primary-blue">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-8 md:mb-0">
+                    <h2 class="text-2xl font-bold gradient-text mb-4">Fotinati Ndele</h2>
+                    <p class="text-gray-300 max-w-md">Bridging the gap between clinical medicine and technology through innovative solutions and mentorship.</p>
+                </div>
+                
+                <div>
+                    <h3 class="text-xl font-bold mb-6">Connect with me</h3>
+                    <div class="flex space-x-6">
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent-blue/10 transition">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent-blue/10 transition">
+                            <i class="fab fa-linkedin-in text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent-blue/10 transition">
+                            <i class="fab fa-github text-xl"></i>
+                        </a>
+                        <a href="#" class="w-12 h-12 rounded-full glass-card flex items-center justify-center hover:bg-accent-blue/10 transition">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-12 pt-8 border-t border-gray-800">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm mb-4 md:mb-0">© 2023 Fotinati Ndele. All rights reserved.</p>
+                    
+                    <div class="flex flex-wrap justify-center gap-6">
+                        <a href="#" class="text-gray-400 hover:text-accent-blue text-sm">@fotinati.ndele</a>
+                        <a href="#" class="text-gray-400 hover:text-accent-blue text-sm">@vectropy</a>
+                        <a href="#" class="text-gray-400 hover:text-accent-blue text-sm">@ndele_grafix</a>
+                        <a href="#" class="text-gray-400 hover:text-accent-blue text-sm">@binaryshadowdev</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top" class="fixed bottom-8 right-8 w-12 h-12 rounded-full glass-card flex items-center justify-center opacity-0 transition-opacity">
+        <i class="fas fa-arrow-up text-accent-blue"></i>
+    </button>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+        
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const closeMenuButton = document.getElementById('close-menu');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+        });
+        
+        closeMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+        });
+        
+        // Close mobile menu when clicking a link
+        const mobileLinks = document.querySelectorAll('#mobile-menu a');
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+            });
+        });
+        
+        // Back to Top Button
+        const backToTopButton = document.getElementById('back-to-top');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTopButton.classList.remove('opacity-0');
+                backToTopButton.classList.add('opacity-100');
+            } else {
+                backToTopButton.classList.remove('opacity-100');
+                backToTopButton.classList.add('opacity-0');
+            }
+        });
+        
+        backToTopButton.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // Form submission
+        const mentorshipForm = document.getElementById('mentorship-form');
+        mentorshipForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert('Thank you for your interest! I will get back to you soon to schedule our mentorship session.');
+            mentorshipForm.reset();
+        });
+        
+        // Simple scroll animation
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-fadeInUp');
+                }
+            });
+        }, observerOptions);
+        
+        // Observe elements for animation
+        document.querySelectorAll('.section-title, .glass-card, .project-card, .skill-icon').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Initialize stagger animation on page load
+        window.addEventListener('load', () => {
+            const staggerElements = document.querySelectorAll('.stagger-animation > *');
+            staggerElements.forEach(el => {
+                el.style.opacity = '0';
+            });
+            
+            setTimeout(() => {
+                staggerElements.forEach(el => {
+                    el.classList.add('animate-fadeInUp');
+                });
+            }, 300);
+        });
+    </script>
+</body>
+</html>
